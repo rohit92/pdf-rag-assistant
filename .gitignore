@@ -1,0 +1,25 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# App data (uploaded PDFs, FAISS index, manifest — may contain private info)
+data/
+uploaded_pdfs/
+faiss_index/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

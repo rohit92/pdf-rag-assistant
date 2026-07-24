@@ -1,0 +1,17 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.git/
+.gitignore
+.env
+.env.*
+data/
+faiss_index/
+uploaded_pdfs/
+.DS_Store
+.idea/
+.vscode/
+*.md
+!README.md

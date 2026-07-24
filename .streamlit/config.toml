@@ -1,0 +1,11 @@
+[server]
+headless = true
+# Allow larger PDFs (megabytes). Increase if you upload big books.
+maxUploadSize = 400
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#4f46e5"
