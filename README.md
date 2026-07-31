@@ -79,6 +79,32 @@ All optional except the key; set in `.env` or secrets:
 | `SUMMARY_THROTTLE_SECONDS` | `0` | Pause between calls to respect rate limits. |
 | `DATA_DIR` | `data` | Where the library + index are stored. |
 
+## Evaluation
+
+Answer quality is capped by *retrieval* quality — if the right page never enters
+the context, the model can't cite it. `evaluation.py` measures retrieval
+directly, at the same `(source, page)` citation granularity the UI shows, against
+a small labelled gold set (`evaluation_gold_example.json`):
+
+```bash
+python evaluation.py --gold evaluation_gold_example.json --k 5
+```
+
+```text
+Retrieval Evaluation  (k=5, 3 questions)
+  Recall@5      0.500
+  Precision@5   0.333   (citation accuracy)
+  Hit-rate@5    0.667
+  MRR           0.667
+  MAP           0.500
+```
+
+Metrics are standard IR measures (recall@k, precision@k, hit-rate, MRR, MAP)
+computed per question then averaged. The retriever is injected as a callable, so
+the metrics are unit-tested with a stub — no index or API key required (see
+`tests/test_evaluation.py`). Use it to tune `CHUNK_SIZE`, `CHUNK_OVERLAP`, and
+`RETRIEVAL_K` against a number instead of by feel.
+
 ## Notes
 
 - Uses `faiss-cpu` (works on macOS Apple Silicon). PyMuPDF ships wheels, so OCR needs no system packages.
